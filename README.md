@@ -2,21 +2,18 @@
 
 Maqueta de una consola Nintendo 3DS dibujada 100 % con **Jetpack Compose** (Kotlin) para Android, sin imágenes ni recursos gráficos externos: todo el aspecto de la consola, las dos pantallas y los botones se genera con código.
 
-![Diseño de la 3DS en Figma](docs/diseno-figma.png)
+![Captura de la app 3DS](docs/captura-app.png)
 
-## Proceso: del diseño al código
+## Proceso
 
-1. **Diseño en Figma.** Antes de escribir código dibujé la consola completa en Figma: carcasa azul, pantalla superior con una escena estilo plataformas (monedas, bloques, personaje y nubes), pantalla inferior con el menú (mundo, vidas, marcador y barra de progreso), cruceta, botones X/Y/A/B y los botones SELECT / HOME / START.
-2. **Medidas y colores.** Del diseño saqué posiciones, tamaños y paleta de colores (azul, amarillo, marrón, gris…) para trasladarlos tal cual.
-3. **Traducción a Compose.** Cada zona del diseño pasó a ser un componente `@Composable` independiente, y todo está colocado con las coordenadas del lienzo de Figma (746 × 720).
-4. **Pruebas en distintos tamaños.** Con `@Preview` y ejecutando en móvil y tablet comprobé que el resultado fuera fiel al diseño original.
+Usé **Figma** como base para tener las ideas claras: ahí definí la estructura de la consola, las zonas de cada pantalla, las medidas y la paleta de colores antes de escribir código. Después lo traduje a Jetpack Compose, dividiendo cada zona en un componente independiente, y lo probé con `@Preview` y en móvil y tablet.
 
 ## Cómo funciona el código
 
 - `MainActivity.kt`: punto de entrada, activa pantalla completa y muestra `Game()`.
 - `ui/theme/game/game.kt`: toda la consola.
   - **Unidad de escala `u`:** se calcula a partir del espacio disponible (`BoxWithConstraints`), de modo que el diseño se escala sin deformarse en cualquier pantalla.
-  - **Piezas base reutilizables:** `Rectangulo`, `Circulo` y `Texto` colocan cualquier elemento por posición y tamaño usando las medidas del diseño.
+  - **Piezas base reutilizables:** `Rectangulo`, `Circulo` y `Texto` colocan cualquier elemento por posición y tamaño.
   - **Composables por zona:** `Cabecera`, `Altavoz`, `PantallaSuperior`, `Escena`, `Bisagra`, `PantallaInferior` y `Controles`.
 - `ui/theme/`: tema de Material 3 generado por Android Studio (`Color.kt`, `Theme.kt`, `Type.kt`).
 
